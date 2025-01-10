@@ -1,3 +1,9 @@
 header {
   box-shadow: 0 4px 20px #1b146426;
+
+  .is-active {
+    font-weight: bold;
+    border-bottom: 2.5px solid red;
+    padding-bottom: 2.5px;
+  }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import {NgxSpinnerModule} from 'ngx-spinner'
+import { NgxSpinnerModule } from 'ngx-spinner'
 import { LoaderComponent } from "./components/loader/loader.component";
 
 @Component({
@@ -9,6 +9,6 @@ import { LoaderComponent } from "./components/loader/loader.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent{
+export class AppComponent {
 
 }

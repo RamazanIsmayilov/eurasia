@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   menuList: any[] = [];
   moduleList: any[] = [];
   moduleName: string = '';
-  selectedModuleId: number | null = null;
+  selectedModuleId!: number;
 
   constructor(
     private menuService: MenuService,
@@ -34,18 +34,12 @@ export class HeaderComponent implements OnInit {
 
   getModules(): void {
     this.moduleService.getModules().subscribe(response => {
-      this.moduleList = response.data;
-      this.selectedModuleId = this.moduleList[0]?.id;
+      this.moduleList = response.data
+      this.selectedModuleId = this.moduleList[0].id;
       const selectedModule = this.moduleList.find(module => module.id === this.selectedModuleId);
       this.moduleName = selectedModule.value.toLowerCase();
-      this.loadMenus();
+      this.getMenus(this.selectedModuleId)
     });
-  }
-
-  loadMenus(): void {
-    if (this.selectedModuleId != null) {
-      this.getMenus(this.selectedModuleId);
-    }
   }
 }
 
