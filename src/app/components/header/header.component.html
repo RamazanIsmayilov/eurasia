@@ -1,0 +1,15 @@
+<header>
+    <div class="container-fluid d-flex align-items-center justify-content-between px-5">
+        <a href="/modules" class="logo">
+            <img width="180" src="../../../assets/images/PRIMARY_LOGO.svg" alt="PRIMARY_LOGO">
+        </a>
+        <nav class="d-flex align-items-center gap-5">
+            <ul *ngFor="let item of menuList">
+                <li>
+                    <a *ngIf="moduleName && item.link" [routerLink]="['/modules', moduleName, item.link]">{{ item.value }}</a>
+                </li>
+            </ul>
+        </nav>
+        <app-header-dropdown></app-header-dropdown>
+    </div>
+</header>

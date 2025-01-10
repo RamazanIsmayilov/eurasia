@@ -1,0 +1,13 @@
+.modules {
+  margin-top: 35px;
+  .module-card {
+    background: linear-gradient(
+      59deg,
+      rgba(198, 196, 224, 0.2) 0%,
+      rgba(198, 196, 224, 0) 100%
+    );
+    box-shadow: 0 5px 22px #231c6c1f;
+    height: 180px;
+    border-radius: 20px;
+  }
+}

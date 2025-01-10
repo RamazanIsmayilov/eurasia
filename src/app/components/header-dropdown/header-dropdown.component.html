@@ -1,0 +1,21 @@
+<div class="profile d-flex align-items-center justify-content-between gap-2">
+    <h5>Eurasia</h5>
+    <div class="dropdown">
+        <button class="bg-transparent dropdown-toggle d-flex align-items-center border-0" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="icon">
+                <i class="fa-solid fa-user"></i>
+            </div>
+        </button>
+        <ul class="dropdown-menu py-3 px-2 gap-4 mt-2">
+            <li><a class="dropdown-item" href="#">Account</a></li>
+            <li><a class="dropdown-item" href="#">Change Password</a></li>
+            <li>
+                <a (click)="logOut()" class="dropdown-item d-flex align-items-center gap-2" href="/login">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

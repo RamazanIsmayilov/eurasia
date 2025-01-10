@@ -1,0 +1,96 @@
+.companies-page {
+  .dropdown {
+    .dropdown-toggle {
+      background-color: #1b1464;
+      padding: 10px 16px;
+      border-radius: 10px;
+      color: #fff;
+    }
+  }
+
+  .mat-elevation-z8 {
+    height: 450px;
+    overflow: auto;
+
+    form {
+      table {
+        border: 1px solid #dfdfdf;
+
+        tr {
+          height: 36px;
+          background-color: #fff;
+
+          &:nth-child(2n-2) {
+            background-color: #e9ecef;
+          }
+
+          th {
+            height: 55px;
+            border: 1.5px solid #dfdfdf;
+            background-color: rgb(244, 243, 249);
+            z-index: 1;
+
+            .inputbox {
+              position: relative;
+              cursor: pointer;
+
+              span {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                transition: 0.2s ease-in-out;
+                font-size: 14px;
+              }
+
+              input {
+                background-color: rgb(221, 218, 234);
+                border-radius: 5px;
+                font-size: 14px;
+                transition: 0.3s ease-in-out;
+                visibility: hidden;
+                opacity: 0;
+                border: 1px solid #ccc;
+              }
+
+              &:focus-within {
+                input {
+                  visibility: visible !important;
+                  opacity: 1 !important;
+                  pointer-events: all;
+                }
+
+                span {
+                  top: -7px;
+                  font-size: 11px;
+                  letter-spacing: 1.5px;
+                  padding-top: 5px;
+                  color: #1f1967;
+                  font-weight: 500;
+                }
+              }
+            }
+          }
+
+          td {
+            padding: 8px;
+            border: 1px solid #dfdfdf;
+          }
+        }
+      }
+    }
+
+    mat-paginator {
+      background-color: #fff;
+      position: sticky;
+      bottom: 0;
+    }
+  }
+}
+
+.selected {
+  background-color: #419197 !important;
+  color: white;
+  cursor: pointer;
+  transition: 0.4s;
+}

@@ -1,0 +1,12 @@
+<router-outlet></router-outlet>
+<app-modules-header></app-modules-header>
+<div class="modules px-4">
+    <div class="row g-4">
+        <div class="col-12 col-sm-12 col-md-3 col-lg-3" *ngFor="let item of moduleList">
+            <a href={{item.url}} class="module-card d-flex align-items-center justify-content-between p-5">
+                <h5 class="fw-bold">{{item.value}}</h5>
+                <img width="42px" [src]="'assets/images/modules-icon/' +item.icon" [alt]="item.value">
+            </a>
+        </div>
+    </div>
+</div>

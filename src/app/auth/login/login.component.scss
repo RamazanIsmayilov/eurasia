@@ -1,0 +1,37 @@
+.login-page {
+  overflow: hidden;
+
+  .row {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+
+    form {
+      span {
+        font-size: 15px;
+        letter-spacing: 0.5px;
+      }
+      .mat-mdc-form-field-subscript-wrapper {
+        height: 0px !important;
+      }
+
+      .example-button-row button {
+        padding: 23px;
+        border-radius: 10px;
+        background-color: #1b1464;
+      }
+    }
+
+    footer {
+      color: rgb(103, 104, 169);
+      position: fixed;
+      bottom: 30px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .overlay {
+    display: none;
+  }
+}
