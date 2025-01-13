@@ -11,16 +11,20 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './addendums.component.scss'
 })
 export class AddendumsComponent {
-  constructor(private dialog: MatDialog){}
+  constructor(private dialog: MatDialog) { }
 
   displayedColumns: string[] = ['addendumNo', 'addendumDate', 'company', 'contractNo', 'effectiveDate', 'endDate', 'file'];
   dataSource = new MatTableDataSource<any>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-    openDialog(): void {
-      const dialogRef = this.dialog.open(NewAddendumsComponent, {panelClass: "custom-container"});
-  
-      dialogRef.afterClosed();
-    }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(NewAddendumsComponent, {
+      width: '50%',
+      height: 'auto',
+      maxWidth: '100%',
+    });
+
+    dialogRef.afterClosed();
+  }
 
 }
