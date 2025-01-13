@@ -1,0 +1,38 @@
+.new-addendums {
+  .head {
+    padding: 15px 20px;
+    background-color: #f5f4f9;
+
+    i {
+      color: #231d65;
+    }
+    h4 {
+      color: #231d65;
+      font-size: 17px;
+    }
+  }
+  form {
+    .buttons {
+      .cancel {
+        border: 1px solid #1b1464;
+        border-radius: 10px;
+        padding: 22px 50px;
+      }
+
+      .save {
+        border: 1px solid #1b1464;
+        border-radius: 10px;
+        padding: 22px 50px;
+        background-color: #1b1464;
+      }
+    }
+  }
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 0px !important;
+}
+
+ .mdc-text-field {
+  padding: 0px !important;
+}

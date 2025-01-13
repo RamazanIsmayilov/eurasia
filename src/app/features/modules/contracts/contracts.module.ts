@@ -17,6 +17,7 @@ import { NewCompaniesComponent } from './companies/new-companies/new-companies.c
 import {MatSelectModule} from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from '../../../components/footer/footer.component';
+import { NewAddendumsComponent } from './addendums/new-addendums/new-addendums.component';
 
 export const routes: Routes = [
   {
@@ -33,7 +34,7 @@ export const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [ContractsComponent, NewCompaniesComponent, CompaniesComponent, DashboardComponent, ContractsPageComponent, AddendumsComponent, LoadPlansComponent, CompaniesComponent],
+  declarations: [ContractsComponent, NewCompaniesComponent, CompaniesComponent, DashboardComponent, ContractsPageComponent, AddendumsComponent, NewAddendumsComponent, LoadPlansComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

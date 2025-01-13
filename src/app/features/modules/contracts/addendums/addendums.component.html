@@ -1,1 +1,112 @@
-<p>addendums works!</p>
+<div class="addendums-page mt-4">
+    <div class="container">
+        <div class="operations-dropdown d-flex align-items-center justify-content-end">
+            <button class="border-0 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-brands fa-trade-federation"></i>
+                Operations
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <button (click)="openDialog()" class="dropdown-item d-flex align-items-center gap-2 fw-medium">
+                        <img src="http://192.168.37.32:5050/assets/img/create.svg" alt="create">
+                        Create
+                    </button>
+                </li>
+                <li>
+                    <button class="dropdown-item d-flex align-items-center gap-2 fw-medium mt-1">
+                        <img src="http://192.168.37.32:5050/assets/img/edit.svg" alt="edit">
+                        Edit
+                    </button>
+                </li>
+                <li>
+                    <button class="dropdown-item d-flex align-items-center gap-2 fw-medium mt-1">
+                        <img src="http://192.168.37.32:5050/assets/img/delete.svg" alt="delete">
+                        Delete
+                    </button>
+                </li>
+                <li>
+                    <button class="dropdown-item d-flex align-items-center gap-2 fw-medium mt-1">
+                        <img src="http://192.168.37.32:5050/assets/img/excel.svg" alt="excel">
+                        Download to Excel
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="mat-elevation-z8 mt-4">
+            <form>
+                <table id="addendum-table" mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="addendumNo">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            <div class="inputbox position-relative" tabindex="1">
+                                <span class="w-100">Addendum №</span>
+                                <input class="form-control border-0 outline-0 shadow-none" type="text">
+                            </div>
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.type}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="addendumDate">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            <div class="inputbox position-relative" tabindex="1">
+                                <span class="w-100">Addendum date</span>
+                                <input class="form-control border-0 outline-0 shadow-none" type="text">
+                            </div>
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="company">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            <div class="inputbox position-relative" tabindex="1">
+                                <span>Company</span>
+                                <input class="form-control border-0 outline-0 shadow-none" type="text">
+                            </div>
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.taxId}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="contractNo">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            <div class="inputbox position-relative" tabindex="1">
+                                <span>Contract №</span>
+                                <input class="form-control border-0 outline-0 shadow-none" type="text">
+                            </div>
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.address}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="effectiveDate">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            <div class="inputbox position-relative" tabindex="1">
+                                <span class="w-100">Effective date</span>
+                                <input class="form-control border-0 outline-0 shadow-none" type="text">
+                            </div>
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.email}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="endDate">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            <div class="inputbox position-relative" tabindex="1">
+                                <span class="w-100">End date</span>
+                                <input class="form-control border-0 outline-0 shadow-none" type="text">
+                            </div>
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.sapcode}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="file">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            <div class="inputbox position-relative" tabindex="1">
+                                <span class="w-100">File</span>
+                                <input class="form-control border-0 outline-0 shadow-none" type="text">
+                            </div>
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.sapcode}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </form>
+
+            <mat-paginator [pageSizeOptions]="[15, 20, 25, 50]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </div>
+    </div>
+</div>
