@@ -19,8 +19,7 @@ export class AddendumsComponent {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(NewAddendumsComponent, {
-      width: '50%',
-      height: 'auto',
+      width: '70%',
       maxWidth: '100%',
     });
 

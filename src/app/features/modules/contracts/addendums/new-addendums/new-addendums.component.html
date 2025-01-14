@@ -3,12 +3,12 @@
         <h4 class="fw-medium">Addendum</h4>
         <button (click)="cancel()" class="bg-transparent border-0"><i class="fa-solid fa-x"></i></button>
     </div>
-    <form class="px-4 py-2">
+    <div class="body px-4 py-2">
         <div class="addendum-information">
             <div class="title">
                 <h5>Addendum information</h5>
             </div>
-            <div class="row mt-4">
+            <form class="row mt-4">
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Addendum Number</mat-label>
@@ -30,7 +30,7 @@
                     </mat-form-field>
                 </div>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-                    <mat-form-field appearance="outline">
+                    <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Contract</mat-label>
                         <mat-select>
                             <mat-option value="test1">test1</mat-option>
@@ -55,12 +55,220 @@
                         <mat-datepicker #endDatePicker></mat-datepicker>
                     </mat-form-field>
                 </div>
-            </div>
-            
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="upload-file text-center rounded p-3 position-relative">
+                        <input type="file" class="w-100 position-absolute top-0 start-0 z-1 opacity-0">
+                        <span class="">Drag & Drop your files or Browse</span>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="buttons d-flex align-items-center justify-content-end gap-4">
+        <div class="addendum-details mt-4">
+            <div class="title">
+                <h5>Addendum Details</h5>
+            </div>
+            <form class="row mt-4">
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Transportation module</mat-label>
+                        <mat-select>
+                            <mat-option value="railway">Railway</mat-option>
+                            <mat-option value="ship">Ship</mat-option>
+                            <mat-option value="truck">Truck</mat-option>
+                            <mat-option value="transshipment">Transshipment</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Mode</mat-label>
+                        <mat-select>
+                            <mat-option value="import">Import</mat-option>
+                            <mat-option value="export">Export</mat-option>
+                            <mat-option value="transit">Transit</mat-option>
+                            <mat-option value="local">Local</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Shipping</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Destination</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Border entry</mat-label>
+                        <mat-select>
+                            <mat-option value="import">Import</mat-option>
+                            <mat-option value="export">Export</mat-option>
+                            <mat-option value="transit">Transit</mat-option>
+                            <mat-option value="local">Local</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Border exit</mat-label>
+                        <mat-select>
+                            <mat-option value="import">Import</mat-option>
+                            <mat-option value="export">Export</mat-option>
+                            <mat-option value="transit">Transit</mat-option>
+                            <mat-option value="local">Local</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Category</mat-label>
+                        <mat-select>
+                            <mat-option value="import">Import</mat-option>
+                            <mat-option value="export">Export</mat-option>
+                            <mat-option value="transit">Transit</mat-option>
+                            <mat-option value="local">Local</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Type</mat-label>
+                        <mat-select>
+                            <mat-option value="import">Import</mat-option>
+                            <mat-option value="export">Export</mat-option>
+                            <mat-option value="transit">Transit</mat-option>
+                            <mat-option value="local">Local</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Cargo(QNQ/ETSNQ)</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Quantity</mat-label>
+                        <input type="number" matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Tariff</mat-label>
+                        <input type="number" matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Purchase cost</mat-label>
+                        <input type="number" matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Loss percentage</mat-label>
+                        <input type="number" matInput>
+                    </mat-form-field>
+                </div>
+                <div class="add-btn d-flex align-items-center justify-content-end">
+                    <button class="d-flex align-items-center text-white border-0 outline-0 px-3 py-2 rounded gap-2">
+                        <i class="fa-solid fa-plus"></i>
+                        Add
+                    </button>
+                </div>
+            </form>
+            <div class="addendum-details-table">
+                <form class="mt-4">
+                    <table mat-table [dataSource]="dataSource">
+                        <ng-container matColumnDef="no">
+                            <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                                No.
+                            </th>
+                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.type}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="transportationModule">
+                            <th class="text-center align-middle fw-bold py-2 w-100" mat-header-cell *matHeaderCellDef>
+                                Transportation module
+                            </th>
+                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.name}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="mode">
+                            <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                                Mode
+                            </th>
+                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.taxId}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="point">
+                            <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                                Point
+                            </th>
+                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.address}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="borderEntry">
+                            <th class="text-center align-middle fw-bold py-2 w-100" mat-header-cell *matHeaderCellDef>
+                                Border entry
+                            </th>
+                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.email}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="borderExit">
+                            <th class="text-center align-middle fw-bold py-2 w-100" mat-header-cell *matHeaderCellDef>
+                                Border exit
+                            </th>
+                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.sapcode}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="cargo">
+                            <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                                Cargo
+                            </th>
+                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.sapcode}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="type">
+                            <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                                Type
+                            </th>
+                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.sapcode}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="quantity">
+                            <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                                Quantity
+                            </th>
+                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.sapcode}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="tariff">
+                            <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                                Tariff
+                            </th>
+                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.sapcode}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="cost">
+                            <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                                Cost
+                            </th>
+                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.sapcode}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="lossPercentage">
+                            <th class="text-center align-middle fw-bold py-2 w-100" mat-header-cell *matHeaderCellDef>
+                                Loss percentage
+                            </th>
+                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.sapcode}} </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="buttons d-flex align-items-center justify-content-end gap-4 mt-4">
             <button (click)="cancel()" mat-flat-button class="cancel text-dark bg-transparent">Cancel</button>
             <button mat-flat-button class="save">Save</button>
         </div>
-    </form>
+    </div>
 </div>

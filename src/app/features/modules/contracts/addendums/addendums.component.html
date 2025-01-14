@@ -35,7 +35,7 @@
 
         <div class="mat-elevation-z8 mt-4">
             <form>
-                <table id="addendum-table" mat-table [dataSource]="dataSource">
+                <table mat-table [dataSource]="dataSource">
                     <ng-container matColumnDef="addendumNo">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
                             <div class="inputbox position-relative" tabindex="1">
@@ -43,7 +43,7 @@
                                 <input class="form-control border-0 outline-0 shadow-none" type="text">
                             </div>
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.type}} </td>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.addendumNo}} </td>
                     </ng-container>
                     <ng-container matColumnDef="addendumDate">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
@@ -52,7 +52,7 @@
                                 <input class="form-control border-0 outline-0 shadow-none" type="text">
                             </div>
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.name}} </td>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.addendumDate}} </td>
                     </ng-container>
                     <ng-container matColumnDef="company">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
@@ -61,7 +61,7 @@
                                 <input class="form-control border-0 outline-0 shadow-none" type="text">
                             </div>
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.taxId}} </td>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.company}} </td>
                     </ng-container>
                     <ng-container matColumnDef="contractNo">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
@@ -70,7 +70,7 @@
                                 <input class="form-control border-0 outline-0 shadow-none" type="text">
                             </div>
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.address}} </td>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.contractNo}} </td>
                     </ng-container>
                     <ng-container matColumnDef="effectiveDate">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
@@ -79,7 +79,7 @@
                                 <input class="form-control border-0 outline-0 shadow-none" type="text">
                             </div>
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.email}} </td>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.effectiveDate}} </td>
                     </ng-container>
                     <ng-container matColumnDef="endDate">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
@@ -88,7 +88,7 @@
                                 <input class="form-control border-0 outline-0 shadow-none" type="text">
                             </div>
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.sapcode}} </td>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.endDate}} </td>
                     </ng-container>
                     <ng-container matColumnDef="file">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
@@ -97,7 +97,7 @@
                                 <input class="form-control border-0 outline-0 shadow-none" type="text">
                             </div>
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.sapcode}} </td>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.fileName}} </td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
