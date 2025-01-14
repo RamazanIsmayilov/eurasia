@@ -13,10 +13,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {CdkDrag} from '@angular/cdk/drag-drop';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { CdkDrag } from '@angular/cdk/drag-drop';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NewCompaniesComponent } from './companies/new-companies/new-companies.component';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from '../../../components/footer/footer.component';
 import { NewAddendumsComponent } from './addendums/new-addendums/new-addendums.component';
@@ -50,6 +51,7 @@ export const routes: Routes = [
     MatInputModule,
     MatDatepickerModule,
     CdkDrag,
+    MatAutocompleteModule,
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule

@@ -8,17 +8,17 @@
             <div class="title">
                 <h5>Addendum information</h5>
             </div>
-            <form class="row mt-4">
+            <form class="row mt-4" [formGroup]="addendumInformationForm">
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Addendum Number</mat-label>
-                        <input matInput>
+                        <input formControlName="addendumNo" matInput>
                     </mat-form-field>
                 </div>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Addendum date</mat-label>
-                        <input matInput [matDatepicker]="addendumDatePicker">
+                        <input matInput formControlName="addendumDate" [matDatepicker]="addendumDatePicker">
                         <mat-datepicker-toggle matIconSuffix [for]="addendumDatePicker"></mat-datepicker-toggle>
                         <mat-datepicker #addendumDatePicker></mat-datepicker>
                     </mat-form-field>
@@ -26,23 +26,29 @@
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Company</mat-label>
-                        <input matInput>
+                        <input formControlName="companyId" type="text" matInput [matAutocomplete]="auto"
+                            (input)="getCompanies()">
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                            <mat-option *ngFor="let company of companyList" [value]="company.value">
+                                {{ company.value }}
+                            </mat-option>
+                        </mat-autocomplete>
                     </mat-form-field>
                 </div>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Contract</mat-label>
-                        <mat-select>
-                            <mat-option value="test1">test1</mat-option>
-                            <mat-option value="test2">test2</mat-option>
-                            <mat-option value="test3">test3</mat-option>
+                        <mat-select formControlName="contractId">
+                            <mat-option *ngFor="let contract of contractList" [value]="contract.key">
+                                {{ contract.value }}
+                            </mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Effective date</mat-label>
-                        <input matInput [matDatepicker]="effectiveDatePicker">
+                        <input formControlName="effectiveDate" matInput [matDatepicker]="effectiveDatePicker">
                         <mat-datepicker-toggle matIconSuffix [for]="effectiveDatePicker"></mat-datepicker-toggle>
                         <mat-datepicker #effectiveDatePicker></mat-datepicker>
                     </mat-form-field>
@@ -50,7 +56,7 @@
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>End date</mat-label>
-                        <input matInput [matDatepicker]="endDatePicker">
+                        <input formControlName="endDate" matInput [matDatepicker]="endDatePicker">
                         <mat-datepicker-toggle matIconSuffix [for]="endDatePicker"></mat-datepicker-toggle>
                         <mat-datepicker #endDatePicker></mat-datepicker>
                     </mat-form-field>
@@ -93,13 +99,23 @@
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Shipping</mat-label>
-                        <input matInput>
+                        <input type="text" matInput [matAutocomplete]="auto">
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                            <mat-option value="test1">test1</mat-option>
+                            <mat-option value="test2">test2</mat-option>
+                            <mat-option value="test3">test3</mat-option>
+                        </mat-autocomplete>
                     </mat-form-field>
                 </div>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Destination</mat-label>
-                        <input matInput>
+                        <input type="text" matInput [matAutocomplete]="auto">
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                            <mat-option value="test1">test1</mat-option>
+                            <mat-option value="test2">test2</mat-option>
+                            <mat-option value="test3">test3</mat-option>
+                        </mat-autocomplete>
                     </mat-form-field>
                 </div>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
@@ -149,7 +165,12 @@
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Cargo(QNQ/ETSNQ)</mat-label>
-                        <input matInput>
+                        <input type="text" matInput [matAutocomplete]="auto">
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                            <mat-option value="test1">test1</mat-option>
+                            <mat-option value="test2">test2</mat-option>
+                            <mat-option value="test3">test3</mat-option>
+                        </mat-autocomplete>
                     </mat-form-field>
                 </div>
                 <div class="col-12 col-sm-12 col-md-3 col-lg-3">
@@ -265,10 +286,10 @@
             </div>
         </div>
     </div>
-    <div class="footer">
-        <div class="buttons d-flex align-items-center justify-content-end gap-4 mt-4">
+    <div class="footer p-4">
+        <div class="buttons d-flex align-items-center justify-content-end gap-4">
             <button (click)="cancel()" mat-flat-button class="cancel text-dark bg-transparent">Cancel</button>
-            <button mat-flat-button class="save">Save</button>
+            <button (click)="saveData()" mat-flat-button class="save">Save</button>
         </div>
     </div>
 </div>
