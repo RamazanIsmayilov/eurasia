@@ -192,11 +192,9 @@
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Category</mat-label>
-                        <mat-select formControlName="categoryId">
-                            <mat-option value="import">Import</mat-option>
-                            <mat-option value="export">Export</mat-option>
-                            <mat-option value="transit">Transit</mat-option>
-                            <mat-option value="local">Local</mat-option>
+                        <mat-select formControlName="categoryId" placeholder="Not Selected">
+                            <mat-option [value]="transportCategory.value"
+                                *ngFor="let transportCategory of transportCategoryList">{{transportCategory.value}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>

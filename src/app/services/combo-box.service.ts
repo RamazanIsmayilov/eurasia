@@ -29,4 +29,8 @@ export class ComboBoxService {
   getTransportCategories(transportationModuleId: number): Observable<any> {
     return this.http.get(`${environment.comboBox}/GetTransportCategories?transportationModuleId=${transportationModuleId}`)
   }
+
+  getTransportTypesByCategory(categoryId: number): Observable<any> {
+    return this.http.get(`${environment.comboBox}/GetTransportTypesByCategory?categoryId=${categoryId}`)
+  }
 }

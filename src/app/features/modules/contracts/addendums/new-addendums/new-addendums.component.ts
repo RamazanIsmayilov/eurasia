@@ -29,6 +29,7 @@ export class NewAddendumsComponent implements OnInit {
   transportTypesList: any[] = []
   startPointList: any[] = []
   borderStationList: any[] = []
+  transportCategoryList: any[] = []
 
   constructor(
     private dialogRef: MatDialogRef<NewAddendumsComponent>,
@@ -127,6 +128,10 @@ export class NewAddendumsComponent implements OnInit {
         this.addendumDetailsForm.get('endPointId')?.disable();
       }
     });
+
+    this.addendumDetailsForm.get("transportationModuleId")?.valueChanges.subscribe(selectedTransportationModuleId => {
+      this.getTransportCategories(selectedTransportationModuleId)
+    })
   }
 
   getTransportTypes() {
@@ -177,6 +182,17 @@ export class NewAddendumsComponent implements OnInit {
     this.comboBoxService.getBorderStations().subscribe({
       next: (response) => {
         this.borderStationList = response.data
+      },
+      error: (error) => {
+        console.log("Error", error);
+      }
+    })
+  }
+
+  getTransportCategories(transportationModuleId: number) {
+    this.comboBoxService.getTransportCategories(transportationModuleId).subscribe({
+      next: (response) => {
+        this.transportCategoryList = response.data
       },
       error: (error) => {
         console.log("Error", error);
