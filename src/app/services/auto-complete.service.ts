@@ -10,8 +10,16 @@ export class AutoCompleteService {
 
   constructor(private http: HttpClient) { }
 
-  getCompanies(filterData: string): Observable<any> {
-    return this.http.get(`${environment.autoComplate}/GetClients?filter=${filterData}`)
+  getCompanies(filter: string): Observable<any> {
+    return this.http.get(`${environment.autoComplate}/GetClients?filter=${filter}`)
+  }
+
+  getPointsByTransportationModule(filter: string, transportationModuleType: number): Observable<any> {
+    return this.http.get(`${environment.autoComplate}/GetPointsByTransportationModule?filter=${filter}&transportationModuleType=${transportationModuleType}`)
+  }
+
+  getAllPoints(filter: string): Observable<any> {
+    return this.http.get(`${environment.autoComplate}/GetAllPoints?filter=${filter}`)
   }
 
 }

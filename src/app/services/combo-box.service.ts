@@ -13,4 +13,20 @@ export class ComboBoxService {
   getContractsByCompany(companyId: number): Observable<any> {
     return this.http.get(`${environment.comboBox}/GetContractsByCompany?companyId=${companyId}`)
   }
+
+  getTransportModuleTypes(): Observable<any> {
+    return this.http.get(`${environment.comboBox}/GetTransportModuleTypes`)
+  }
+
+  getTransportTypes(): Observable<any> {
+    return this.http.get(`${environment.comboBox}/GetTransportTypes`)
+  }
+
+  getBorderStations(): Observable<any> {
+    return this.http.get(`${environment.comboBox}/GetBorderStations`)
+  }
+
+  getTransportCategories(transportationModuleId: number): Observable<any> {
+    return this.http.get(`${environment.comboBox}/GetTransportCategories?transportationModuleId=${transportationModuleId}`)
+  }
 }
