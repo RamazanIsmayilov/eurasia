@@ -33,9 +33,6 @@ export class NewAddendumsComponent implements OnInit {
   transportTypesByCategoryList: any[] = []
   qnqEtsnqsList: any[] = []
 
-  addendumDetailsFormList: any[] = this.addendumDetailsForm?.value
-
-
   constructor(
     private dialogRef: MatDialogRef<NewAddendumsComponent>,
     private addendumService: AddendumsService,
@@ -52,7 +49,9 @@ export class NewAddendumsComponent implements OnInit {
       companyId: [null, Validators.required],
       contractId: [null, Validators.required],
       effectiveDate: ["", Validators.required],
-      endDate: ["", Validators.required]
+      endDate: ["", Validators.required],
+      addendumDetails: [],
+      deletedAddendumDetailIds: []
     })
 
     this.addendumDetailsForm = this.fb.group({
@@ -76,6 +75,13 @@ export class NewAddendumsComponent implements OnInit {
     this.getTransportTypes()
     this.getTransportModuleTypes()
     this.getBorderStations()
+  }
+
+  saveDetailData() {
+    const newAddendumDetails = this.addendumDetailsForm.value;
+    this.addendumInformationForm.patchValue({ addendumDetails: newAddendumDetails });
+    this.dataSource = newAddendumDetails
+    console.log(this.dataSource);
   }
 
   getCompanies() {
@@ -136,7 +142,6 @@ export class NewAddendumsComponent implements OnInit {
 
     this.addendumDetailsForm.get("transportationModuleId")?.valueChanges.subscribe(transportationModuleId => {
       this.getTransportCategories(transportationModuleId)
-      console.log(transportationModuleId);
     })
   }
 
@@ -280,10 +285,6 @@ export class NewAddendumsComponent implements OnInit {
     } else {
       console.log("Form is invalid");
     }
-  }
-
-  saveDetailData() {
-    console.log("salam");
   }
 
   cancel() {
