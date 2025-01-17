@@ -30,6 +30,7 @@ export class NewAddendumsComponent implements OnInit {
   startPointList: any[] = []
   borderStationList: any[] = []
   transportCategoryList: any[] = []
+  transportTypesByCategoryList: any[] = []
 
   constructor(
     private dialogRef: MatDialogRef<NewAddendumsComponent>,
@@ -129,8 +130,8 @@ export class NewAddendumsComponent implements OnInit {
       }
     });
 
-    this.addendumDetailsForm.get("transportationModuleId")?.valueChanges.subscribe(selectedTransportationModuleId => {
-      this.getTransportCategories(selectedTransportationModuleId)
+    this.addendumDetailsForm.get("transportationModuleId")?.valueChanges.subscribe(transportationModuleId => {
+      this.getTransportCategories(transportationModuleId)
     })
   }
 
@@ -145,16 +146,30 @@ export class NewAddendumsComponent implements OnInit {
     })
 
     this.addendumDetailsForm.get("transportTypeId")?.valueChanges.subscribe(value => {
-      if (value === 1) {
-        this.addendumDetailsForm.get('borderEntryStationId')?.enable();
-      } else if (value === 2) {
-        this.addendumDetailsForm.get('borderExitStationId')?.enable();
-      } else if (value === 3) {
-        this.addendumDetailsForm.get('borderEntryStationId')?.enable();
-        this.addendumDetailsForm.get('borderExitStationId')?.enable();
-      } else {
-        this.addendumDetailsForm.get('borderEntryStationId')?.disable();
-        this.addendumDetailsForm.get('borderExitStationId')?.disable();
+      switch (value) {
+        case 1:
+          this.addendumDetailsForm.get('borderEntryStationId')?.enable();
+          this.addendumDetailsForm.get('borderEntryStationId')?.reset();
+          this.addendumDetailsForm.get('borderExitStationId')?.disable();
+          this.addendumDetailsForm.get('borderExitStationId')?.reset();
+          break
+        case 2:
+          this.addendumDetailsForm.get('borderExitStationId')?.enable();
+          this.addendumDetailsForm.get('borderExitStationId')?.reset();
+          this.addendumDetailsForm.get('borderEntryStationId')?.disable();
+          this.addendumDetailsForm.get('borderEntryStationId')?.reset();
+          break
+        case 3:
+          this.addendumDetailsForm.get('borderEntryStationId')?.enable();
+          this.addendumDetailsForm.get('borderEntryStationId')?.reset();
+          this.addendumDetailsForm.get('borderExitStationId')?.enable();
+          this.addendumDetailsForm.get('borderExitStationId')?.reset();
+          break
+        case 4:
+          this.addendumDetailsForm.get('borderEntryStationId')?.disable();
+          this.addendumDetailsForm.get('borderEntryStationId')?.reset();
+          this.addendumDetailsForm.get('borderExitStationId')?.disable();
+          this.addendumDetailsForm.get('borderExitStationId')?.reset();
       }
     })
   }
@@ -198,6 +213,22 @@ export class NewAddendumsComponent implements OnInit {
         console.log("Error", error);
       }
     })
+
+    this.addendumDetailsForm.get("categoryId")?.valueChanges.subscribe(categoryId => {
+      this.getTransportTypesByCategory(categoryId.key)
+    })
+  }
+
+  getTransportTypesByCategory(categoryId: number) {
+    this.comboBoxService.getTransportTypesByCategory(categoryId).subscribe({
+      next: (response) => {
+        this.transportTypesByCategoryList = response.data
+        console.log(response);
+      },
+      error: (error) => {
+        console.log("Error", error);
+      }
+    })
   }
 
   saveData() {
@@ -225,5 +256,4 @@ export class NewAddendumsComponent implements OnInit {
   cancel() {
     this.dialogRef.close()
   }
-
 }

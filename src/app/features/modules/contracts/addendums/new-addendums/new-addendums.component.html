@@ -201,11 +201,9 @@
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Type</mat-label>
-                        <mat-select formControlName="wagonTypeId">
-                            <mat-option value="import">Import</mat-option>
-                            <mat-option value="export">Export</mat-option>
-                            <mat-option value="transit">Transit</mat-option>
-                            <mat-option value="local">Local</mat-option>
+                        <mat-select formControlName="wagonTypeId" placeholder="Not Selected">
+                            <mat-option *ngFor="let transportTypesByCategory of transportTypesByCategoryList"
+                                [value]="transportTypesByCategory.value">{{transportTypesByCategory.value}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
