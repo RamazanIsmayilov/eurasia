@@ -117,8 +117,8 @@
                     class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Shipping</mat-label>
-                        <input formControlName="startPointId" type="text" matInput [matAutocomplete]="autoShipping"
-                            (input)="getPointsByTransportationModule()">
+                        <input placeholder="Not Selected" formControlName="startPointId" type="text" matInput
+                            [matAutocomplete]="autoShipping" (input)="getPointsByTransportationModule()">
                         <mat-autocomplete autoActiveFirstOption #autoShipping="matAutocomplete">
                             <mat-option *ngFor="let startPoint of startPointList" [value]="startPoint.value">
                                 {{ startPoint.value }}
@@ -211,13 +211,15 @@
                     class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Cargo(QNQ/ETSNQ)</mat-label>
-                        <input formControlName="cargoId" type="text" matInput [matAutocomplete]="auto">
+                        <input (input)="getQnqEtsnqs()" placeholder="Not Selected" formControlName="cargoId" type="text"
+                            matInput [matAutocomplete]="auto">
                         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                            <mat-option value="test1">test1</mat-option>
-                            <mat-option value="test2">test2</mat-option>
-                            <mat-option value="test3">test3</mat-option>
+                            <mat-option [value]="qnqEtsnq.value"
+                                *ngFor="let qnqEtsnq of qnqEtsnqsList">{{qnqEtsnq.value}}</mat-option>
                         </mat-autocomplete>
                     </mat-form-field>
+                    <span class="validation-text text-danger fw-medium" *ngIf="addendumDetailsForm.controls['cargoId'].invalid && 
+                 addendumDetailsForm.controls['cargoId']?.touched">Cargo not selected</span>
                 </div>
                 <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                     <mat-form-field class="w-100" appearance="outline">
@@ -244,7 +246,11 @@
                     </mat-form-field>
                 </div>
                 <div class="add-btn d-flex align-items-center justify-content-end">
-                    <button class="d-flex align-items-center text-white border-0 outline-0 px-3 py-2 rounded gap-2">
+                    <button [ngClass]="{
+                        'text-white opacity-50': addendumDetailsForm.invalid,
+                        'opacity-100': addendumDetailsForm.valid
+                    }" [disabled]="addendumDetailsForm.invalid"
+                        class="d-flex align-items-center text-white border-0 outline-0 px-3 py-2 rounded gap-2">
                         <i class="fa-solid fa-plus"></i>
                         Add
                     </button>
@@ -336,12 +342,11 @@
         <div class="buttons d-flex align-items-center justify-content-end gap-4">
             <button (click)="cancel()" mat-flat-button class="cancel text-dark bg-transparent">Cancel</button>
             <button (click)="saveData()" mat-flat-button class="save" [ngClass]="{
-        'text-white opacity-50': !addendumInformationForm.valid,
+        'text-white opacity-50': addendumInformationForm.invalid,
         'opacity-100': addendumInformationForm.valid
-    }" [disabled]="!addendumInformationForm.valid">
+    }" [disabled]="addendumInformationForm.invalid">
                 Save
             </button>
-
         </div>
     </div>
 </div>

@@ -22,4 +22,7 @@ export class AutoCompleteService {
     return this.http.get(`${environment.autoComplate}/GetAllPoints?filter=${filter}`)
   }
 
+  getQnqEtsnqs(filter: string): Observable<any> {
+    return this.http.get(`${environment.autoComplate}/GetQnqEtsnqs?filter=${filter}`)
+  }
 }

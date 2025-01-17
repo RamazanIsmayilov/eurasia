@@ -31,6 +31,10 @@ export class NewAddendumsComponent implements OnInit {
   borderStationList: any[] = []
   transportCategoryList: any[] = []
   transportTypesByCategoryList: any[] = []
+  qnqEtsnqsList: any[] = []
+
+  addendumDetailsFormList: any[] = this.addendumDetailsForm?.value
+
 
   constructor(
     private dialogRef: MatDialogRef<NewAddendumsComponent>,
@@ -40,7 +44,7 @@ export class NewAddendumsComponent implements OnInit {
     private fb: FormBuilder
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.addendumInformationForm = this.fb.group({
       id: [0],
       addendumNo: ["", Validators.required],
@@ -69,11 +73,6 @@ export class NewAddendumsComponent implements OnInit {
       lossPercentage: [null], //lossPercentage
     })
 
-    this.addendumInformationForm.get("companyId")?.valueChanges.subscribe(selectedCompanyKey => {
-      const selectedCompany = this.companyList.find(company => company.value === selectedCompanyKey);
-      this.getContractsByCompany(selectedCompany?.key);
-    });
-
     this.getTransportTypes()
     this.getTransportModuleTypes()
     this.getBorderStations()
@@ -88,6 +87,11 @@ export class NewAddendumsComponent implements OnInit {
         console.log("Error", error);
       }
     })
+
+    this.addendumInformationForm.get("companyId")?.valueChanges.subscribe(selectedCompanyKey => {
+      const selectedCompany = this.companyList.find(company => company.value === selectedCompanyKey);
+      this.getContractsByCompany(selectedCompany?.key);
+    });
   }
 
   getContractsByCompany(companyId: number) {
@@ -132,6 +136,7 @@ export class NewAddendumsComponent implements OnInit {
 
     this.addendumDetailsForm.get("transportationModuleId")?.valueChanges.subscribe(transportationModuleId => {
       this.getTransportCategories(transportationModuleId)
+      console.log(transportationModuleId);
     })
   }
 
@@ -150,25 +155,37 @@ export class NewAddendumsComponent implements OnInit {
         case 1:
           this.addendumDetailsForm.get('borderEntryStationId')?.enable();
           this.addendumDetailsForm.get('borderEntryStationId')?.reset();
+
           this.addendumDetailsForm.get('borderExitStationId')?.disable();
+          this.addendumDetailsForm.get('borderExitStationId')?.setValidators(null);
+          this.addendumDetailsForm.get('borderExitStationId')?.updateValueAndValidity();
           this.addendumDetailsForm.get('borderExitStationId')?.reset();
           break
         case 2:
           this.addendumDetailsForm.get('borderExitStationId')?.enable();
           this.addendumDetailsForm.get('borderExitStationId')?.reset();
+
           this.addendumDetailsForm.get('borderEntryStationId')?.disable();
+          this.addendumDetailsForm.get('borderEntryStationId')?.setValidators(null);
+          this.addendumDetailsForm.get('borderEntryStationId')?.updateValueAndValidity();
           this.addendumDetailsForm.get('borderEntryStationId')?.reset();
           break
         case 3:
           this.addendumDetailsForm.get('borderEntryStationId')?.enable();
           this.addendumDetailsForm.get('borderEntryStationId')?.reset();
+
           this.addendumDetailsForm.get('borderExitStationId')?.enable();
           this.addendumDetailsForm.get('borderExitStationId')?.reset();
           break
         case 4:
           this.addendumDetailsForm.get('borderEntryStationId')?.disable();
+          this.addendumDetailsForm.get('borderEntryStationId')?.setValidators(null);
+          this.addendumDetailsForm.get('borderEntryStationId')?.updateValueAndValidity();
           this.addendumDetailsForm.get('borderEntryStationId')?.reset();
+
           this.addendumDetailsForm.get('borderExitStationId')?.disable();
+          this.addendumDetailsForm.get('borderExitStationId')?.setValidators(null);
+          this.addendumDetailsForm.get('borderExitStationId')?.updateValueAndValidity();
           this.addendumDetailsForm.get('borderExitStationId')?.reset();
       }
     })
@@ -215,7 +232,8 @@ export class NewAddendumsComponent implements OnInit {
     })
 
     this.addendumDetailsForm.get("categoryId")?.valueChanges.subscribe(categoryId => {
-      this.getTransportTypesByCategory(categoryId.key)
+      const selectedTransportCategory = this.transportCategoryList.find(category => category.value === categoryId);
+      this.getTransportTypesByCategory(selectedTransportCategory?.key)
     })
   }
 
@@ -223,7 +241,18 @@ export class NewAddendumsComponent implements OnInit {
     this.comboBoxService.getTransportTypesByCategory(categoryId).subscribe({
       next: (response) => {
         this.transportTypesByCategoryList = response.data
-        console.log(response);
+      },
+      error: (error) => {
+        console.log("Error", error);
+      }
+    })
+  }
+
+  getQnqEtsnqs() {
+    const filterData = this.addendumDetailsForm.get("cargoId")?.value
+    this.autoCompleteService.getQnqEtsnqs(filterData).subscribe({
+      next: (response) => {
+        this.qnqEtsnqsList = response.data
       },
       error: (error) => {
         console.log("Error", error);
@@ -251,6 +280,10 @@ export class NewAddendumsComponent implements OnInit {
     } else {
       console.log("Form is invalid");
     }
+  }
+
+  saveDetailData() {
+    console.log("salam");
   }
 
   cancel() {
