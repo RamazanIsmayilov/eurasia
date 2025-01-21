@@ -52,30 +52,28 @@
       }
 
       .addendum-details-table {
-        form {
-          table {
-            border: 1px solid #dfdfdf;
+        overflow: auto;
+        table {
+          border: 1px solid #dfdfdf;
+          width: 100pc;
 
-            tr {
-              overflow: auto;
-              width: 300px;
+          tr {
+            background-color: #fff;
+
+            &:nth-child(2n-2) {
+              background-color: #e9ecef;
+            }
+
+            th {
               height: 36px;
-              background-color: #fff;
+              border: 1.5px solid #dfdfdf;
+              background-color: rgb(244, 243, 249) !important;
+              font-weight: 500 !important;
+            }
 
-              &:nth-child(2n-2) {
-                background-color: #e9ecef;
-              }
-
-              th {
-                border: 1.5px solid #dfdfdf;
-                background-color: rgb(244, 243, 249) !important;
-                font-weight: 500 !important;
-              }
-
-              td {
-                padding: 8px;
-                border: 1px solid #dfdfdf;
-              }
+            td {
+              padding: 0px 8px;
+              border: 1px solid #dfdfdf;
             }
           }
         }

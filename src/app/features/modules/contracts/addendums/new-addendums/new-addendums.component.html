@@ -28,7 +28,7 @@
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Company</mat-label>
-                        <input formControlName="companyId" type="text" matInput [matAutocomplete]="autoCompany"
+                        <input formControlName="company" type="text" matInput [matAutocomplete]="autoCompany"
                             (input)="getCompanies()">
                         <mat-autocomplete autoActiveFirstOption #autoCompany="matAutocomplete">
                             <mat-option *ngFor="let company of companyList" [value]="company.value">
@@ -39,8 +39,8 @@
                             </mat-option>
                         </mat-autocomplete>
                     </mat-form-field>
-                    <span class="validation-text text-danger fw-medium" *ngIf="addendumInformationForm.controls['companyId'].invalid && 
-                 addendumInformationForm.controls['companyId']?.touched">Company is required</span>
+                    <span class="validation-text text-danger fw-medium" *ngIf="addendumInformationForm.controls['company'].invalid && 
+                 addendumInformationForm.controls['company']?.touched">Company is required</span>
                 </div>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
@@ -90,22 +90,22 @@
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Transportation module</mat-label>
-                        <mat-select formControlName="transportationModuleId" placeholder="Not Selected">
+                        <mat-select formControlName="transportationModule" placeholder="Not Selected">
                             <mat-option *ngFor="let transportModuleType of transportModuleTypesList"
-                                [value]="transportModuleType.key">
+                                [value]="transportModuleType.value">
                                 {{transportModuleType.value}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <span class="validation-text text-danger fw-medium" *ngIf="addendumDetailsForm.controls['transportationModuleId'].invalid && 
-                 addendumDetailsForm.controls['transportationModuleId']?.touched">Transportation module is
+                    <span class="validation-text text-danger fw-medium" *ngIf="addendumDetailsForm.controls['transportationModule'].invalid && 
+                 addendumDetailsForm.controls['transportationModule']?.touched">Transportation module is
                         required</span>
                 </div>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Mode</mat-label>
-                        <mat-select formControlName="transportTypeId" placeholder="Not Selected">
-                            <mat-option *ngFor="let transportType of transportTypesList" [value]="transportType.key">
+                        <mat-select formControlName="transportType" placeholder="Not Selected">
+                            <mat-option *ngFor="let transportType of transportTypesList" [value]="transportType.value">
                                 {{transportType.value}}
                             </mat-option>
                         </mat-select>
@@ -253,85 +253,93 @@
                     </button>
                 </div>
             </form>
-            <div class="addendum-details-table">
-                <form class="mt-4">
-                    <table mat-table [dataSource]="dataSource">
-                        <ng-container matColumnDef="no">
-                            <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
-                                No.
-                            </th>
-                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.type}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="transportationModule">
-                            <th class="text-center align-middle fw-bold py-2 w-100" mat-header-cell *matHeaderCellDef>
-                                Transportation module
-                            </th>
-                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.transportationModuleId}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="mode">
-                            <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
-                                Mode
-                            </th>
-                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.transportTypeId}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="point">
-                            <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
-                                Point
-                            </th>
-                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.startPointId}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="borderEntry">
-                            <th class="text-center align-middle fw-bold py-2 w-100" mat-header-cell *matHeaderCellDef>
-                                Border entry
-                            </th>
-                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.borderEntryStationId}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="borderExit">
-                            <th class="text-center align-middle fw-bold py-2 w-100" mat-header-cell *matHeaderCellDef>
-                                Border exit
-                            </th>
-                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.borderExitStationId}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="cargo">
-                            <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
-                                Cargo
-                            </th>
-                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.cargoId}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="type">
-                            <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
-                                Type
-                            </th>
-                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.wagonTypeId}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="quantity">
-                            <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
-                                Quantity
-                            </th>
-                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.quantity}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="tariff">
-                            <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
-                                Tariff
-                            </th>
-                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.tariff}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="cost">
-                            <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
-                                Cost
-                            </th>
-                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.cost}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="lossPercentage">
-                            <th class="text-center align-middle fw-bold py-2 w-100" mat-header-cell *matHeaderCellDef>
-                                Loss percentage
-                            </th>
-                            <td class="align-middle" mat-cell *matCellDef="let element"> {{element.lossPercentage}} </td>
-                        </ng-container>
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
-                </form>
+            <div class="addendum-details-table mt-4">
+                <table mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="no">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            No.
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.type}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="transportationModule">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            Transportation module
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element">
+                            {{element.transportationModuleId}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="mode">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            Mode
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element">
+                            {{element.transportTypeId}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="point">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            Point
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.startPointId}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="borderEntry">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            Border entry
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element">
+                            {{element.borderEntryStationId}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="borderExit">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            Border exit
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element">
+                            {{element.borderExitStationId}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="cargo">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            Cargo
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.cargoId}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="type">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            Type
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.wagonTypeId}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="quantity">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            Quantity
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.quantity}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="tariff">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            Tariff
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.tariff}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="cost">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            Cost
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.cost}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="lossPercentage">
+                        <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
+                            Loss percentage
+                        </th>
+                        <td class="align-middle" mat-cell *matCellDef="let element">
+                            {{element.lossPercentage}}
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
             </div>
         </div>
     </div>

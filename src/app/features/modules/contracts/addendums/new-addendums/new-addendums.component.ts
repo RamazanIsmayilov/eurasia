@@ -46,30 +46,33 @@ export class NewAddendumsComponent implements OnInit {
       id: [0],
       addendumNo: ["", Validators.required],
       addendumDate: [""],
-      companyId: [null, Validators.required],
+      company: ["", Validators.required],
+      companyId: [null],
       contractId: [null, Validators.required],
       effectiveDate: ["", Validators.required],
       endDate: ["", Validators.required],
-      addendumDetails: [],
-      deletedAddendumDetailIds: []
+      addendumDetails: [[]],
+      deletedAddendumDetailIds: [[]]
     })
 
     this.addendumDetailsForm = this.fb.group({
       id: [0],
-      transportationModuleId: [null, Validators.required], //transportation module
-      transportTypeId: [null, Validators.required], //mode
+      transportationModule: ["", Validators.required],
+      transportationModuleId: [null],
+      transportType: [null, Validators.required], //mode
+      transportTypeId: [null], //mode
       startPointId: [{ value: null, disabled: true }, Validators.required], //shipping
       endPointId: [{ value: null, disabled: true }, Validators.required], //destination
-      pointId: [null, Validators.required], //point
-      borderEntryStationId: [{ value: null, disabled: true }, Validators.required], //borderEntry
-      borderExitStationId: [{ value: null, disabled: true }, Validators.required], //borderExit
-      categoryId: [null], //category
+      pointId: [null, Validators.required],
+      borderEntryStationId: [{ value: null, disabled: true }, Validators.required],
+      borderExitStationId: [{ value: null, disabled: true }, Validators.required],
+      categoryId: [null],
       wagonTypeId: [null], //type
-      cargoId: [null, Validators.required], //cargo(QNQ/ETSNQ)
-      quantity: [null], //quantity
-      tariff: [null], //tariff
-      cost: [null], //cost
-      lossPercentage: [null], //lossPercentage
+      cargoId: [null, Validators.required],
+      quantity: [null],
+      tariff: [null],
+      cost: [null],
+      lossPercentage: [null],
     })
 
     this.getTransportTypes()
@@ -78,14 +81,21 @@ export class NewAddendumsComponent implements OnInit {
   }
 
   saveDetailData() {
-    const newAddendumDetails = this.addendumDetailsForm.value;
-    this.addendumInformationForm.patchValue({ addendumDetails: newAddendumDetails });
-    this.dataSource = newAddendumDetails
-    console.log(this.dataSource);
+    const addendumDetailsData = { ...this.addendumDetailsForm.value };
+
+    const selectedTransportationModule = this.transportModuleTypesList.find(item => item.value === addendumDetailsData.transportationModule);
+    addendumDetailsData.transportationModuleId = selectedTransportationModule?.key;
+
+    const selectedTransportationType = this.transportTypesList.find(item => item.value === addendumDetailsData.transportType);
+    addendumDetailsData.transportTypeId = selectedTransportationType?.key;
+
+    this.addendumInformationForm.patchValue({ addendumDetails: [addendumDetailsData] });
+    this.dataSource = new MatTableDataSource<any>([addendumDetailsData]);
+    this.addendumDetailsForm.reset()
   }
 
   getCompanies() {
-    this.autoCompleteService.getCompanies(this.addendumInformationForm.get("companyId")?.value.toLowerCase()).subscribe({
+    this.autoCompleteService.getCompanies(this.addendumInformationForm.get("company")?.value.toLowerCase()).subscribe({
       next: (response) => {
         this.companyList = response.data;
       },
@@ -94,8 +104,8 @@ export class NewAddendumsComponent implements OnInit {
       }
     })
 
-    this.addendumInformationForm.get("companyId")?.valueChanges.subscribe(selectedCompanyKey => {
-      const selectedCompany = this.companyList.find(company => company.value === selectedCompanyKey);
+    this.addendumInformationForm.get("company")?.valueChanges.subscribe(company => {
+      const selectedCompany = this.companyList.find(item => item.value === company);
       this.getContractsByCompany(selectedCompany?.key);
     });
   }
@@ -121,15 +131,18 @@ export class NewAddendumsComponent implements OnInit {
       }
     });
 
-    this.addendumDetailsForm.get('transportationModuleId')?.valueChanges.subscribe(value => {
-      if (value) {
+    this.addendumDetailsForm.get('transportationModule')?.valueChanges.subscribe(transportationModule => {
+      const selectedTransportationModule = this.transportModuleTypesList.find(item => item.value === transportationModule);
+      this.getTransportCategories(selectedTransportationModule?.key)
+
+      if (selectedTransportationModule?.key) {
         this.addendumDetailsForm.get('startPointId')?.enable();
         this.addendumDetailsForm.get('startPointId')?.reset();
         this.addendumDetailsForm.get('endPointId')?.enable();
         this.addendumDetailsForm.get('endPointId')?.reset();
         this.startPointList = [];
 
-        if (value === 4) {
+        if (selectedTransportationModule?.key === 4) {
           this.toggleInput = true;
         } else {
           this.toggleInput = false;
@@ -140,9 +153,6 @@ export class NewAddendumsComponent implements OnInit {
       }
     });
 
-    this.addendumDetailsForm.get("transportationModuleId")?.valueChanges.subscribe(transportationModuleId => {
-      this.getTransportCategories(transportationModuleId)
-    })
   }
 
   getTransportTypes() {
@@ -155,8 +165,9 @@ export class NewAddendumsComponent implements OnInit {
       }
     })
 
-    this.addendumDetailsForm.get("transportTypeId")?.valueChanges.subscribe(value => {
-      switch (value) {
+    this.addendumDetailsForm.get("transportType")?.valueChanges.subscribe(transportationType => {
+      const selectedTransportationType = this.transportTypesList.find(item => item.value === transportationType);
+      switch (selectedTransportationType?.key) {
         case 1:
           this.addendumDetailsForm.get('borderEntryStationId')?.enable();
           this.addendumDetailsForm.get('borderEntryStationId')?.reset();
@@ -200,11 +211,13 @@ export class NewAddendumsComponent implements OnInit {
     const filterData = this.addendumDetailsForm.get("startPointId")?.value?.toLowerCase() ||
       this.addendumDetailsForm.get("pointId")?.value?.toLowerCase() ||
       this.addendumDetailsForm.get("endPointId")?.value?.toLowerCase();
-    const transportationModuleType = this.addendumDetailsForm.get("transportationModuleId")?.value;
+    const transportationModule = this.addendumDetailsForm.get("transportationModule")?.value;
+    const transportationModuleType = this.transportModuleTypesList.find(item => item.value === transportationModule);
 
-    const apiCall = transportationModuleType === 3
+    const apiCall = transportationModuleType.key === 3
       ? this.autoCompleteService.getAllPoints(filterData)
-      : this.autoCompleteService.getPointsByTransportationModule(filterData, transportationModuleType);
+      : this.autoCompleteService.getPointsByTransportationModule(filterData, transportationModuleType.key);
+
     apiCall.subscribe({
       next: (response) => {
         this.startPointList = response.data;
@@ -214,6 +227,7 @@ export class NewAddendumsComponent implements OnInit {
       }
     });
   }
+
 
   getBorderStations() {
     this.comboBoxService.getBorderStations().subscribe({
@@ -270,13 +284,13 @@ export class NewAddendumsComponent implements OnInit {
     addendumData.addendumDate = momment(addendumData.addendumDate).format("YYYY-MM-DD");
     addendumData.effectiveDate = momment(addendumData.effectiveDate).format("YYYY-MM-DD");
     addendumData.endDate = momment(addendumData.endDate).format("YYYY-MM-DD");
-    const selectedCompany = this.companyList.find(company => company.value === addendumData.companyId);
-    addendumData.companyId = selectedCompany.key;
+    const selectedCompany = this.companyList.find(company => company.value === addendumData.company);
+    addendumData.companyId = selectedCompany?.key;
 
     if (this.addendumInformationForm.valid) {
       this.addendumService.addOrUpdateAddendum(addendumData).subscribe({
         next: (response) => {
-          console.log(response);
+          console.log(response.data);
         },
         error: (error) => {
           console.log("Error", error);
