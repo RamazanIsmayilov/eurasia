@@ -13,4 +13,8 @@ export class AddendumsService {
   addOrUpdateAddendum(addendumData: any): Observable<any> {
     return this.http.put(`${environment.addendumUrl}/AddOrUpdateAddendum`, addendumData)
   }
+
+  getAllAddendums(transportationModuleId: number, addendumData: any): Observable<any> {
+    return this.http.post(`${environment.addendumUrl}/GetAllAddendums?transportationModuleId=${transportationModuleId}`, addendumData)
+  }
 }

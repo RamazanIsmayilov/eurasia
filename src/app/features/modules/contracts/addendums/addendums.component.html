@@ -1,38 +1,45 @@
 <div class="addendums-page mt-4">
     <div class="container">
-        <div class="operations-dropdown d-flex align-items-center justify-content-end">
-            <button class="border-0 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-brands fa-trade-federation"></i>
-                Operations
-            </button>
-            <ul class="dropdown-menu">
-                <li>
-                    <button (click)="openDialog()" class="dropdown-item d-flex align-items-center gap-2 fw-medium">
-                        <img src="http://192.168.37.32:5050/assets/img/create.svg" alt="create">
-                        Create
-                    </button>
-                </li>
-                <li>
-                    <button class="dropdown-item d-flex align-items-center gap-2 fw-medium mt-1">
-                        <img src="http://192.168.37.32:5050/assets/img/edit.svg" alt="edit">
-                        Edit
-                    </button>
-                </li>
-                <li>
-                    <button class="dropdown-item d-flex align-items-center gap-2 fw-medium mt-1">
-                        <img src="http://192.168.37.32:5050/assets/img/delete.svg" alt="delete">
-                        Delete
-                    </button>
-                </li>
-                <li>
-                    <button class="dropdown-item d-flex align-items-center gap-2 fw-medium mt-1">
-                        <img src="http://192.168.37.32:5050/assets/img/excel.svg" alt="excel">
-                        Download to Excel
-                    </button>
-                </li>
-            </ul>
+        <div class="head d-flex align-items-center justify-content-end gap-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Transportation type</mat-label>
+                <mat-select placeholder="Not Selected">
+                    <mat-option value="test">test</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="operations-dropdown d-flex align-items-center justify-content-end">
+                <button class="border-0 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-brands fa-trade-federation"></i>
+                    Operations
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <button (click)="openDialog()" class="dropdown-item d-flex align-items-center gap-2 fw-medium">
+                            <img src="http://192.168.37.32:5050/assets/img/create.svg" alt="create">
+                            Create
+                        </button>
+                    </li>
+                    <li>
+                        <button class="dropdown-item d-flex align-items-center gap-2 fw-medium mt-1">
+                            <img src="http://192.168.37.32:5050/assets/img/edit.svg" alt="edit">
+                            Edit
+                        </button>
+                    </li>
+                    <li>
+                        <button class="dropdown-item d-flex align-items-center gap-2 fw-medium mt-1">
+                            <img src="http://192.168.37.32:5050/assets/img/delete.svg" alt="delete">
+                            Delete
+                        </button>
+                    </li>
+                    <li>
+                        <button class="dropdown-item d-flex align-items-center gap-2 fw-medium mt-1">
+                            <img src="http://192.168.37.32:5050/assets/img/excel.svg" alt="excel">
+                            Download to Excel
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
-
         <div class="mat-elevation-z8 mt-4">
             <form>
                 <table mat-table [dataSource]="dataSource">
@@ -43,7 +50,8 @@
                                 <input class="form-control border-0 outline-0 shadow-none" type="text">
                             </div>
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.addendumNo}} </td>
+                        <td class="align-middle text-center" mat-cell *matCellDef="let element"> {{element.addendumNo}}
+                        </td>
                     </ng-container>
                     <ng-container matColumnDef="addendumDate">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
@@ -52,7 +60,8 @@
                                 <input class="form-control border-0 outline-0 shadow-none" type="text">
                             </div>
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.addendumDate}} </td>
+                        <td class="align-middle text-center" mat-cell *matCellDef="let element">
+                            {{element.addendumDate}} </td>
                     </ng-container>
                     <ng-container matColumnDef="company">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
@@ -61,16 +70,18 @@
                                 <input class="form-control border-0 outline-0 shadow-none" type="text">
                             </div>
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.company}} </td>
+                        <td class="align-middle text-center" mat-cell *matCellDef="let element"> {{element.company}}
+                        </td>
                     </ng-container>
                     <ng-container matColumnDef="contractNo">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
                             <div class="inputbox position-relative" tabindex="1">
-                                <span>Contract №</span>
+                                <span class="w-100">Contract №</span>
                                 <input class="form-control border-0 outline-0 shadow-none" type="text">
                             </div>
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.contractNo}} </td>
+                        <td class="align-middle text-center" mat-cell *matCellDef="let element"> {{element.contractNo}}
+                        </td>
                     </ng-container>
                     <ng-container matColumnDef="effectiveDate">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
@@ -79,7 +90,8 @@
                                 <input class="form-control border-0 outline-0 shadow-none" type="text">
                             </div>
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.effectiveDate}} </td>
+                        <td class="align-middle text-center" mat-cell *matCellDef="let element">
+                            {{element.effectiveDate}} </td>
                     </ng-container>
                     <ng-container matColumnDef="endDate">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
@@ -88,7 +100,8 @@
                                 <input class="form-control border-0 outline-0 shadow-none" type="text">
                             </div>
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.endDate}} </td>
+                        <td class="align-middle text-center" mat-cell *matCellDef="let element"> {{element.endDate}}
+                        </td>
                     </ng-container>
                     <ng-container matColumnDef="file">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
@@ -103,7 +116,6 @@
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
             </form>
-
             <mat-paginator [pageSizeOptions]="[15, 20, 25, 50]" showFirstLastButtons
                 aria-label="Select page of periodic elements">
             </mat-paginator>

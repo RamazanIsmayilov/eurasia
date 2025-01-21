@@ -34,7 +34,6 @@
         </li>
       </ul>
     </div>
-
     <div class="mat-elevation-z8 mt-4">
       <form (ngSubmit)="onSubmit()" [formGroup]="searchForm" (keydown.enter)="onEnter($event)">
         <table id="company-table" mat-table [dataSource]="dataSource">
@@ -102,7 +101,6 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
       </form>
-
       <mat-paginator [pageSizeOptions]="[15, 20, 25, 50]" showFirstLastButtons [length]="totalCount"
         (page)="onChangePage()" aria-label="Select page of periodic elements">
       </mat-paginator>
