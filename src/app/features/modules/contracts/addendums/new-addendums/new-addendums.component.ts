@@ -60,12 +60,13 @@ export class NewAddendumsComponent implements OnInit {
       transportationModule: ["", Validators.required],
       transportationModuleId: [null],
       transportType: [null, Validators.required], //mode
-      transportTypeId: [null], //mode
+      transportTypeId: [null],
       startPoint: [{ value: null, disabled: true }, Validators.required], //shipping
-      startPointId: [null], //shipping
+      startPointId: [null],
       endPoint: [{ value: null, disabled: true }, Validators.required], //destination
-      endPointId: [null], //destination
-      pointId: [null, Validators.required],
+      endPointId: [null],
+      point: [null, Validators.required],
+      pointId: [null],
       borderEntryStation: [{ value: null, disabled: true }, Validators.required],
       borderEntryStationId: [null],
       borderExitStation: [{ value: null, disabled: true }, Validators.required],
@@ -73,7 +74,7 @@ export class NewAddendumsComponent implements OnInit {
       category: [""],
       categoryId: [null],
       wagonType: [""], //type
-      wagonTypeId: [null], //type
+      wagonTypeId: [null],
       cargo: ["", Validators.required],
       cargoId: [null],
       quantity: [null],
@@ -117,9 +118,17 @@ export class NewAddendumsComponent implements OnInit {
     const selectedCargo = this.qnqEtsnqsList.find(item => item.value === addendumDetailsData.cargo);
     addendumDetailsData.cargoId = selectedCargo?.key;
 
-    this.addendumInformationForm.patchValue({ addendumDetails: [addendumDetailsData] });
-    this.dataSource = new MatTableDataSource<any>([addendumDetailsData]);
-    this.addendumDetailsForm.reset()
+    const selectedPoint = this.startPointList.find(item => item.value === addendumDetailsData.point);
+    addendumDetailsData.pointId = selectedPoint?.key;
+
+    const currentDetails = this.addendumInformationForm.get('addendumDetails')?.value || [];
+    addendumDetailsData.id = currentDetails.length;
+    const updatedDetails = [...currentDetails, addendumDetailsData];
+
+    this.addendumInformationForm.patchValue({ addendumDetails: updatedDetails });
+    this.dataSource = new MatTableDataSource<any>(updatedDetails);
+
+    this.addendumDetailsForm.reset();
   }
 
   getCompanies() {
@@ -237,7 +246,7 @@ export class NewAddendumsComponent implements OnInit {
 
   getPointsByTransportationModule() {
     const filterData = this.addendumDetailsForm.get("startPoint")?.value?.toLowerCase() ||
-      this.addendumDetailsForm.get("pointId")?.value?.toLowerCase() ||
+      this.addendumDetailsForm.get("point")?.value?.toLowerCase() ||
       this.addendumDetailsForm.get("endPoint")?.value?.toLowerCase();
     const transportationModule = this.addendumDetailsForm.get("transportationModule")?.value;
     const transportationModuleType = this.transportModuleTypesList.find(item => item.value === transportationModule);
@@ -255,7 +264,6 @@ export class NewAddendumsComponent implements OnInit {
       }
     });
   }
-
 
   getBorderStations() {
     this.comboBoxService.getBorderStations().subscribe({

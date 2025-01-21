@@ -135,7 +135,7 @@
                     class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Point</mat-label>
-                        <input formControlName="pointId" type="text" matInput [matAutocomplete]="autoPoint"
+                        <input formControlName="point" type="text" matInput [matAutocomplete]="autoPoint"
                             (input)="getPointsByTransportationModule()">
                         <mat-autocomplete autoActiveFirstOption #autoPoint="matAutocomplete">
                             <mat-option *ngFor="let startPoint of startPointList" [value]="startPoint.value">
@@ -146,8 +146,8 @@
                             </mat-option>
                         </mat-autocomplete>
                     </mat-form-field>
-                    <span class="validation-text text-danger fw-medium" *ngIf="addendumDetailsForm.controls['pointId'].invalid && 
-                 addendumDetailsForm.controls['pointId']?.touched">Point not selected</span>
+                    <span class="validation-text text-danger fw-medium" *ngIf="addendumDetailsForm.controls['point'].invalid && 
+                 addendumDetailsForm.controls['point']?.touched">Point not selected</span>
                 </div>
                 <div [ngClass]="{'d-none': toggleInput === true, 'd-block': toggleInput === false}"
                     class="col-12 col-sm-12 col-md-4 col-lg-4">
@@ -259,11 +259,11 @@
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
                             No.
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.type}} </td>
+                        <td class="align-middle" mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
                     </ng-container>
                     <ng-container matColumnDef="transportationModule">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
-                            Transportation module
+                            {{'Transportation module' | slice: 0:18}}...
                         </th>
                         <td class="align-middle" mat-cell *matCellDef="let element">
                             {{element.transportationModule}} </td>
@@ -280,34 +280,46 @@
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
                             Point
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.startPoint}} </td>
+                        <td class="align-middle" mat-cell *matCellDef="let element">
+                            <span *ngIf="element.startPoint; else pointTemplate">
+                                {{ element.startPoint | slice: 0:20 }}{{ element.startPoint?.length > 20 ? '...' : '' }}
+                            </span>
+                            <ng-template #pointTemplate>
+                                {{ element.point | slice: 0:20 }}{{ element.point?.length > 20 ? '...' : '' }}
+                            </ng-template>
+                        </td>
                     </ng-container>
                     <ng-container matColumnDef="borderEntry">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
                             Border entry
                         </th>
                         <td class="align-middle" mat-cell *matCellDef="let element">
-                            {{element.borderEntryStation}} </td>
+                            {{element.borderEntryStation | slice: 0:20}}{{ element.borderEntryStation?.length > 20 ?
+                            '...' : '' }}</td>
                     </ng-container>
                     <ng-container matColumnDef="borderExit">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
                             Border exit
                         </th>
                         <td class="align-middle" mat-cell *matCellDef="let element">
-                            {{element.borderExitStation}}
+                            {{element.borderExitStation | slice: 0:20}}{{ element.borderExitStation?.length > 20 ? '...'
+                            : '' }}
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="cargo">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
                             Cargo
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.cargo}} </td>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.cargo | slice: 0:20}}{{
+                            element.cargo?.length > 20 ? '...' : '' }}
+                        </td>
                     </ng-container>
                     <ng-container matColumnDef="type">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
                             Type
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.wagonType}}
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.wagonType | slice:
+                            0:20}}{{ element.wagonType?.length > 20 ? '...' : '' }}
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="quantity">
