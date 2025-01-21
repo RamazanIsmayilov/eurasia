@@ -61,14 +61,21 @@ export class NewAddendumsComponent implements OnInit {
       transportationModuleId: [null],
       transportType: [null, Validators.required], //mode
       transportTypeId: [null], //mode
-      startPointId: [{ value: null, disabled: true }, Validators.required], //shipping
-      endPointId: [{ value: null, disabled: true }, Validators.required], //destination
+      startPoint: [{ value: null, disabled: true }, Validators.required], //shipping
+      startPointId: [null], //shipping
+      endPoint: [{ value: null, disabled: true }, Validators.required], //destination
+      endPointId: [null], //destination
       pointId: [null, Validators.required],
-      borderEntryStationId: [{ value: null, disabled: true }, Validators.required],
-      borderExitStationId: [{ value: null, disabled: true }, Validators.required],
+      borderEntryStation: [{ value: null, disabled: true }, Validators.required],
+      borderEntryStationId: [null],
+      borderExitStation: [{ value: null, disabled: true }, Validators.required],
+      borderExitStationId: [null],
+      category: [""],
       categoryId: [null],
+      wagonType: [""], //type
       wagonTypeId: [null], //type
-      cargoId: [null, Validators.required],
+      cargo: ["", Validators.required],
+      cargoId: [null],
       quantity: [null],
       tariff: [null],
       cost: [null],
@@ -88,6 +95,27 @@ export class NewAddendumsComponent implements OnInit {
 
     const selectedTransportationType = this.transportTypesList.find(item => item.value === addendumDetailsData.transportType);
     addendumDetailsData.transportTypeId = selectedTransportationType?.key;
+
+    const selectedStartPoint = this.startPointList.find(item => item.value === addendumDetailsData.startPoint);
+    addendumDetailsData.startPointId = selectedStartPoint?.key;
+
+    const selectedEndPoint = this.startPointList.find(item => item.value === addendumDetailsData.endPoint);
+    addendumDetailsData.endPointId = selectedEndPoint?.key;
+
+    const selectedBorderEntryStation = this.borderStationList.find(item => item.value === addendumDetailsData.borderEntryStation);
+    addendumDetailsData.borderEntryStationId = selectedBorderEntryStation?.key;
+
+    const selectedBorderExitStation = this.borderStationList.find(item => item.value === addendumDetailsData.borderExitStation);
+    addendumDetailsData.borderExitStationId = selectedBorderExitStation?.key;
+
+    const selectedCategory = this.transportCategoryList.find(item => item.value === addendumDetailsData.category);
+    addendumDetailsData.categoryId = selectedCategory?.key;
+
+    const selectedWagonType = this.transportTypesByCategoryList.find(item => item.value === addendumDetailsData.wagonType);
+    addendumDetailsData.wagonTypeId = selectedWagonType?.key;
+
+    const selectedCargo = this.qnqEtsnqsList.find(item => item.value === addendumDetailsData.cargo);
+    addendumDetailsData.cargoId = selectedCargo?.key;
 
     this.addendumInformationForm.patchValue({ addendumDetails: [addendumDetailsData] });
     this.dataSource = new MatTableDataSource<any>([addendumDetailsData]);
@@ -136,10 +164,10 @@ export class NewAddendumsComponent implements OnInit {
       this.getTransportCategories(selectedTransportationModule?.key)
 
       if (selectedTransportationModule?.key) {
-        this.addendumDetailsForm.get('startPointId')?.enable();
-        this.addendumDetailsForm.get('startPointId')?.reset();
-        this.addendumDetailsForm.get('endPointId')?.enable();
-        this.addendumDetailsForm.get('endPointId')?.reset();
+        this.addendumDetailsForm.get('startPoint')?.enable();
+        this.addendumDetailsForm.get('startPoint')?.reset();
+        this.addendumDetailsForm.get('endPoint')?.enable();
+        this.addendumDetailsForm.get('endPoint')?.reset();
         this.startPointList = [];
 
         if (selectedTransportationModule?.key === 4) {
@@ -148,8 +176,8 @@ export class NewAddendumsComponent implements OnInit {
           this.toggleInput = false;
         }
       } else {
-        this.addendumDetailsForm.get('startPointId')?.disable();
-        this.addendumDetailsForm.get('endPointId')?.disable();
+        this.addendumDetailsForm.get('startPoint')?.disable();
+        this.addendumDetailsForm.get('endPoint')?.disable();
       }
     });
 
@@ -169,48 +197,48 @@ export class NewAddendumsComponent implements OnInit {
       const selectedTransportationType = this.transportTypesList.find(item => item.value === transportationType);
       switch (selectedTransportationType?.key) {
         case 1:
-          this.addendumDetailsForm.get('borderEntryStationId')?.enable();
-          this.addendumDetailsForm.get('borderEntryStationId')?.reset();
+          this.addendumDetailsForm.get('borderEntryStation')?.enable();
+          this.addendumDetailsForm.get('borderEntryStation')?.reset();
 
-          this.addendumDetailsForm.get('borderExitStationId')?.disable();
-          this.addendumDetailsForm.get('borderExitStationId')?.setValidators(null);
-          this.addendumDetailsForm.get('borderExitStationId')?.updateValueAndValidity();
-          this.addendumDetailsForm.get('borderExitStationId')?.reset();
+          this.addendumDetailsForm.get('borderExitStation')?.disable();
+          this.addendumDetailsForm.get('borderExitStation')?.setValidators(null);
+          this.addendumDetailsForm.get('borderExitStation')?.updateValueAndValidity();
+          this.addendumDetailsForm.get('borderExitStation')?.reset();
           break
         case 2:
-          this.addendumDetailsForm.get('borderExitStationId')?.enable();
-          this.addendumDetailsForm.get('borderExitStationId')?.reset();
+          this.addendumDetailsForm.get('borderExitStation')?.enable();
+          this.addendumDetailsForm.get('borderExitStation')?.reset();
 
-          this.addendumDetailsForm.get('borderEntryStationId')?.disable();
-          this.addendumDetailsForm.get('borderEntryStationId')?.setValidators(null);
-          this.addendumDetailsForm.get('borderEntryStationId')?.updateValueAndValidity();
-          this.addendumDetailsForm.get('borderEntryStationId')?.reset();
+          this.addendumDetailsForm.get('borderEntryStation')?.disable();
+          this.addendumDetailsForm.get('borderEntryStation')?.setValidators(null);
+          this.addendumDetailsForm.get('borderEntryStation')?.updateValueAndValidity();
+          this.addendumDetailsForm.get('borderEntryStation')?.reset();
           break
         case 3:
-          this.addendumDetailsForm.get('borderEntryStationId')?.enable();
-          this.addendumDetailsForm.get('borderEntryStationId')?.reset();
+          this.addendumDetailsForm.get('borderEntryStation')?.enable();
+          this.addendumDetailsForm.get('borderEntryStation')?.reset();
 
-          this.addendumDetailsForm.get('borderExitStationId')?.enable();
-          this.addendumDetailsForm.get('borderExitStationId')?.reset();
+          this.addendumDetailsForm.get('borderExitStation')?.enable();
+          this.addendumDetailsForm.get('borderExitStation')?.reset();
           break
         case 4:
-          this.addendumDetailsForm.get('borderEntryStationId')?.disable();
-          this.addendumDetailsForm.get('borderEntryStationId')?.setValidators(null);
-          this.addendumDetailsForm.get('borderEntryStationId')?.updateValueAndValidity();
-          this.addendumDetailsForm.get('borderEntryStationId')?.reset();
+          this.addendumDetailsForm.get('borderEntryStation')?.disable();
+          this.addendumDetailsForm.get('borderEntryStation')?.setValidators(null);
+          this.addendumDetailsForm.get('borderEntryStation')?.updateValueAndValidity();
+          this.addendumDetailsForm.get('borderEntryStation')?.reset();
 
-          this.addendumDetailsForm.get('borderExitStationId')?.disable();
-          this.addendumDetailsForm.get('borderExitStationId')?.setValidators(null);
-          this.addendumDetailsForm.get('borderExitStationId')?.updateValueAndValidity();
-          this.addendumDetailsForm.get('borderExitStationId')?.reset();
+          this.addendumDetailsForm.get('borderExitStation')?.disable();
+          this.addendumDetailsForm.get('borderExitStation')?.setValidators(null);
+          this.addendumDetailsForm.get('borderExitStation')?.updateValueAndValidity();
+          this.addendumDetailsForm.get('borderExitStation')?.reset();
       }
     })
   }
 
   getPointsByTransportationModule() {
-    const filterData = this.addendumDetailsForm.get("startPointId")?.value?.toLowerCase() ||
+    const filterData = this.addendumDetailsForm.get("startPoint")?.value?.toLowerCase() ||
       this.addendumDetailsForm.get("pointId")?.value?.toLowerCase() ||
-      this.addendumDetailsForm.get("endPointId")?.value?.toLowerCase();
+      this.addendumDetailsForm.get("endPoint")?.value?.toLowerCase();
     const transportationModule = this.addendumDetailsForm.get("transportationModule")?.value;
     const transportationModuleType = this.transportModuleTypesList.find(item => item.value === transportationModule);
 
@@ -250,8 +278,8 @@ export class NewAddendumsComponent implements OnInit {
       }
     })
 
-    this.addendumDetailsForm.get("categoryId")?.valueChanges.subscribe(categoryId => {
-      const selectedTransportCategory = this.transportCategoryList.find(category => category.value === categoryId);
+    this.addendumDetailsForm.get("category")?.valueChanges.subscribe(category => {
+      const selectedTransportCategory = this.transportCategoryList.find(item => item.value === category);
       this.getTransportTypesByCategory(selectedTransportCategory?.key)
     })
   }
@@ -268,7 +296,7 @@ export class NewAddendumsComponent implements OnInit {
   }
 
   getQnqEtsnqs() {
-    const filterData = this.addendumDetailsForm.get("cargoId")?.value
+    const filterData = this.addendumDetailsForm.get("cargo")?.value
     this.autoCompleteService.getQnqEtsnqs(filterData).subscribe({
       next: (response) => {
         this.qnqEtsnqsList = response.data

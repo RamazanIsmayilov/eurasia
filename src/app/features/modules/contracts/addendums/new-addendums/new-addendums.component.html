@@ -117,7 +117,7 @@
                     class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Shipping</mat-label>
-                        <input placeholder="Not Selected" formControlName="startPointId" type="text" matInput
+                        <input placeholder="Not Selected" formControlName="startPoint" type="text" matInput
                             [matAutocomplete]="autoShipping" (input)="getPointsByTransportationModule()">
                         <mat-autocomplete autoActiveFirstOption #autoShipping="matAutocomplete">
                             <mat-option *ngFor="let startPoint of startPointList" [value]="startPoint.value">
@@ -128,8 +128,8 @@
                             </mat-option>
                         </mat-autocomplete>
                     </mat-form-field>
-                    <span class="validation-text text-danger fw-medium" *ngIf="addendumDetailsForm.controls['startPointId'].invalid && 
-                 addendumDetailsForm.controls['startPointId']?.touched">Start point not selected</span>
+                    <span class="validation-text text-danger fw-medium" *ngIf="addendumDetailsForm.controls['startPoint'].invalid && 
+                 addendumDetailsForm.controls['startPoint']?.touched">Start point not selected</span>
                 </div>
                 <div [ngClass]="{'d-none': toggleInput === false, 'd-block': toggleInput === true}"
                     class="col-12 col-sm-12 col-md-4 col-lg-4">
@@ -153,7 +153,7 @@
                     class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Destination</mat-label>
-                        <input formControlName="endPointId" type="text" matInput [matAutocomplete]="autoDestination"
+                        <input formControlName="endPoint" type="text" matInput [matAutocomplete]="autoDestination"
                             (input)="getPointsByTransportationModule()">
                         <mat-autocomplete autoActiveFirstOption #autoDestination="matAutocomplete">
                             <mat-option *ngFor="let startPoint of startPointList" [value]="startPoint.value">
@@ -164,35 +164,35 @@
                             </mat-option>
                         </mat-autocomplete>
                     </mat-form-field>
-                    <span class="validation-text text-danger fw-medium" *ngIf="addendumDetailsForm.controls['endPointId'].invalid && 
-                 addendumDetailsForm.controls['endPointId']?.touched">End point not selected</span>
+                    <span class="validation-text text-danger fw-medium" *ngIf="addendumDetailsForm.controls['endPoint'].invalid && 
+                 addendumDetailsForm.controls['endPoint']?.touched">End point not selected</span>
                 </div>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Border entry</mat-label>
-                        <mat-select formControlName="borderEntryStationId" placeholder="Not Selected">
+                        <mat-select formControlName="borderEntryStation" placeholder="Not Selected">
                             <mat-option [value]="borderStation.value"
                                 *ngFor="let borderStation of borderStationList">{{borderStation.value}}</mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <span class="validation-text text-danger fw-medium" *ngIf="addendumDetailsForm.controls['borderEntryStationId'].invalid && 
-                 addendumDetailsForm.controls['borderEntryStationId']?.touched">Border entry is required</span>
+                    <span class="validation-text text-danger fw-medium" *ngIf="addendumDetailsForm.controls['borderEntryStation'].invalid && 
+                 addendumDetailsForm.controls['borderEntryStation']?.touched">Border entry is required</span>
                 </div>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Border exit</mat-label>
-                        <mat-select formControlName="borderExitStationId" placeholder="Not Selected">
+                        <mat-select formControlName="borderExitStation" placeholder="Not Selected">
                             <mat-option [value]="borderStation.value"
                                 *ngFor="let borderStation of borderStationList">{{borderStation.value}}</mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <span class="validation-text text-danger fw-medium" *ngIf="addendumDetailsForm.controls['borderExitStationId'].invalid && 
-                 addendumDetailsForm.controls['borderExitStationId']?.touched">Border exit is required</span>
+                    <span class="validation-text text-danger fw-medium" *ngIf="addendumDetailsForm.controls['borderExitStation'].invalid && 
+                 addendumDetailsForm.controls['borderExitStation']?.touched">Border exit is required</span>
                 </div>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Category</mat-label>
-                        <mat-select formControlName="categoryId" placeholder="Not Selected">
+                        <mat-select formControlName="category" placeholder="Not Selected">
                             <mat-option [value]="transportCategory.value"
                                 *ngFor="let transportCategory of transportCategoryList">{{transportCategory.value}}</mat-option>
                         </mat-select>
@@ -201,7 +201,7 @@
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Type</mat-label>
-                        <mat-select formControlName="wagonTypeId" placeholder="Not Selected">
+                        <mat-select formControlName="wagonType" placeholder="Not Selected">
                             <mat-option *ngFor="let transportTypesByCategory of transportTypesByCategoryList"
                                 [value]="transportTypesByCategory.value">{{transportTypesByCategory.value}}</mat-option>
                         </mat-select>
@@ -211,15 +211,15 @@
                     class="col-12 col-sm-12 col-md-4 col-lg-4">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Cargo(QNQ/ETSNQ)</mat-label>
-                        <input (input)="getQnqEtsnqs()" placeholder="Not Selected" formControlName="cargoId" type="text"
+                        <input (input)="getQnqEtsnqs()" placeholder="Not Selected" formControlName="cargo" type="text"
                             matInput [matAutocomplete]="auto">
                         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                             <mat-option [value]="qnqEtsnq.value"
                                 *ngFor="let qnqEtsnq of qnqEtsnqsList">{{qnqEtsnq.value}}</mat-option>
                         </mat-autocomplete>
                     </mat-form-field>
-                    <span class="validation-text text-danger fw-medium" *ngIf="addendumDetailsForm.controls['cargoId'].invalid && 
-                 addendumDetailsForm.controls['cargoId']?.touched">Cargo not selected</span>
+                    <span class="validation-text text-danger fw-medium" *ngIf="addendumDetailsForm.controls['cargo'].invalid && 
+                 addendumDetailsForm.controls['cargo']?.touched">Cargo not selected</span>
                 </div>
                 <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                     <mat-form-field class="w-100" appearance="outline">
@@ -266,48 +266,48 @@
                             Transportation module
                         </th>
                         <td class="align-middle" mat-cell *matCellDef="let element">
-                            {{element.transportationModuleId}} </td>
+                            {{element.transportationModule}} </td>
                     </ng-container>
                     <ng-container matColumnDef="mode">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
                             Mode
                         </th>
                         <td class="align-middle" mat-cell *matCellDef="let element">
-                            {{element.transportTypeId}}
+                            {{element.transportType}}
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="point">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
                             Point
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.startPointId}} </td>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.startPoint}} </td>
                     </ng-container>
                     <ng-container matColumnDef="borderEntry">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
                             Border entry
                         </th>
                         <td class="align-middle" mat-cell *matCellDef="let element">
-                            {{element.borderEntryStationId}} </td>
+                            {{element.borderEntryStation}} </td>
                     </ng-container>
                     <ng-container matColumnDef="borderExit">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
                             Border exit
                         </th>
                         <td class="align-middle" mat-cell *matCellDef="let element">
-                            {{element.borderExitStationId}}
+                            {{element.borderExitStation}}
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="cargo">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
                             Cargo
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.cargoId}} </td>
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.cargo}} </td>
                     </ng-container>
                     <ng-container matColumnDef="type">
                         <th class="text-center align-middle fw-bold py-2" mat-header-cell *matHeaderCellDef>
                             Type
                         </th>
-                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.wagonTypeId}}
+                        <td class="align-middle" mat-cell *matCellDef="let element"> {{element.wagonType}}
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="quantity">
